@@ -3,7 +3,8 @@ import { useAuth } from '../lib/auth'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const auth = useAuth();
+  // const auth = useAuth();
+  const auth = null;
   return (
     <div className={styles.container}>
       <Head>
