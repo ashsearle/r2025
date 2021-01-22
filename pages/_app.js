@@ -1,13 +1,12 @@
-import { ThemeProvider, CSSReset } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Global, css } from "@emotion/react";
-import { AuthProvider } from "@/lib/auth";
 
-const customTheme = {};
+import { AuthProvider } from "@/lib/auth";
+import theme from "@/styles/theme";
 
 const GlobalStyle = () => {
   return (
     <>
-      <CSSReset />
       <Global
         styles={css`
           html {
@@ -27,12 +26,12 @@ const GlobalStyle = () => {
 
 const App = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={customTheme}>
+    <ChakraProvider theme={theme}>
       <AuthProvider>
         <GlobalStyle />
         <Component {...pageProps} />
       </AuthProvider>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 };
 

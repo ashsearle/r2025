@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Button, Heading, Text, Code } from "@chakra-ui/react";
 import { useAuth } from "@/lib/auth";
 
 export default function Home() {
@@ -7,22 +8,18 @@ export default function Home() {
     <div>
       <Head>
         <title>R2025</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1>r2025</h1>
+        <Heading>r2025</Heading>
+        <Text>
+          Current user: <Code>{auth?.user?.email ?? "None"}</Code>
+        </Text>
 
-        <p>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        {!auth?.user && (
-          <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>
-        )}
-        <div>{auth?.user?.email}</div>
-        {auth?.user && (
-          <button onClick={(e) => auth.signout()}>Sign Out</button>
+        {auth.user ? (
+          <Button onClick={(e) => auth.signout()}>Sign Out</Button>
+        ) : (
+          <Button onClick={(e) => auth.signinWithGitHub()}>Sign In</Button>
         )}
       </main>
     </div>
