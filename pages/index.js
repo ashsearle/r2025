@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { Button, Flex } from "@chakra-ui/react";
+import { Avatar, Button, Flex } from "@chakra-ui/react";
 import { useAuth } from "@/lib/auth";
 import { LogoIcon } from "@/styles/icons";
 
 export default function Home() {
   const auth = useAuth();
+  console.log({ user: auth.user });
   return (
     <Flex
       as="main"
@@ -21,13 +22,21 @@ export default function Home() {
       <LogoIcon color="black" boxSize="48px" />
 
       {auth.user ? (
-        <Button onClick={(e) => auth.signout()} mt={4} size="sm">
-          Sign Out
-        </Button>
+        <>
+          <Avatar size="sm" src={auth.user?.photoUrl} name={auth.user?.name} />
+          <Button onClick={(e) => auth.signout()} mt={4} size="sm">
+            Sign Out
+          </Button>
+        </>
       ) : (
-        <Button onClick={(e) => auth.signinWithGitHub()} mt={4} size="sm">
-          Sign In
-        </Button>
+        <>
+          <Button onClick={(e) => auth.signinWithGitHub()} mt={4} size="sm">
+            Sign In with GitHub
+          </Button>
+          <Button onClick={(e) => auth.signinWithGoogle()} mt={4} size="sm">
+            Sign In with Google
+          </Button>
+        </>
       )}
     </Flex>
   );
